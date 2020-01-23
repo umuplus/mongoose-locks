@@ -1,6 +1,7 @@
 # mongoose-locks
 
-document specific locks for fields
+Document specific locks for fields.
+Works like immutable fields but you can customize them for each field and modify them on the air.
 
 ## Install
 
@@ -19,8 +20,17 @@ npm i --save mongoose-locks
 
 ```js
 const locks = require('mongoose-locks');
-
-const schema = mongoose.Schema({ name: String, title: String });
-
+const schema = mongoose.Schema({ name: String, job: String });
 schema.plugin(locks, { name: 'locks', default: [ 'name' ], helpers: true });
+UserModel = mongoose.model('User', schema);
+
+const user = new UserModel({ name: 'John', job: 'Developer' });
+await user.save(); // That's fine.
+user.name = 'Michael';
+await user.save(); // Throws error for name field!
+user.unlockField('name');
+user.lockField('job');
+user.name = 'Michael';
+user.job = 'Teacher';
+await user.save(); // Throws error for job field!
 ```
