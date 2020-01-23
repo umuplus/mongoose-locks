@@ -1,7 +1,7 @@
 # mongoose-locks
 
 Document specific locks for fields.
-Works like immutable fields but you can customize them for each field and modify them on the air.
+Works like immutable fields but you can customize them for each document and modify them on the air.
 
 ## Install
 
@@ -14,7 +14,14 @@ npm i --save mongoose-locks
 - **name (string)       :** field name to store locked fields. it's "locks" by default.
 - **default (array)     :** default value for locked fields. it's empty array by default.
 - **helpers (boolean)   :** flag for adding helper methods. it's false by default.
-- **throw (boolean)     :** flag for throwing errors instead of silent process. it's false by default.
+- **throw (boolean)     :** flag for throwing errors instead of preventing silently process. it's false by default.
+
+## Method
+
+If you want to access these methods, you need to set helpers option as true.
+
+- **lockField(field):** locks a field. you can't lock storage field
+- **unlockField(field):** unlocks a field.
 
 ## Examples
 

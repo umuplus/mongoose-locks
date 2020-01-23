@@ -1,6 +1,6 @@
 {
   "name": "mongoose-locks",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "document specific locks for fields",
   "keywords": [
     "mongo",
