@@ -24,10 +24,11 @@ module.exports = function (schema, options = {}) {
     schema.pre('save', function (next) {
         if (this.isNew) return next();
         if (this[name] instanceof Array)
-            for (const field of this[name])
+            this[name].forEach(field => {
                 if (this.isModified(field))
                     if (!options.throw) this.unmarkModified(field);
                     else throw new Error(`"${ field }" is locked!`);
+            });
         next();
     });
 };
