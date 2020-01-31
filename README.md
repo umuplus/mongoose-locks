@@ -32,7 +32,9 @@ npm i --save mongoose-locks
 
 If you want to access these methods, you need to set helpers option as true.
 
+- **lockAll():** locks all fields except storage field
 - **lockField(field):** locks a field. you can't lock storage field
+- **unlockAll():** unlocks all fields
 - **unlockField(field):** unlocks a field.
 
 ## Examples
