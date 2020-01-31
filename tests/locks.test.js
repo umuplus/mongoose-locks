@@ -85,4 +85,25 @@ describe('mongoose locks', () => {
         await model.save();
         expect(model.name).toBe(name);
     });
+
+    test('lock all', async () => {
+        try {
+            const model = await TestModel.findOne({ _id: id });
+            model.lockAll();
+            model.name = Math.random().toString();
+            await model.save();
+            expect(model.locks).not.toBeTruthy();
+        } catch (e) {
+            expect(e.message.endsWith('is locked!')).toBeTruthy();
+        }
+    });
+
+    test('unlock all', async () => {
+        const model = await TestModel.findOne({ _id: id });
+        model.unlockAll();
+        name = Math.random().toString();
+        model.name = name;
+        await model.save();
+        expect(model.name).toBe(name);
+    });
 });
